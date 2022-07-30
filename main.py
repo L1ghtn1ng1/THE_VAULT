@@ -1,8 +1,10 @@
 # Base libraries
 import tkinter as tk
 from tkinter import ttk
+from tkinter.messagebox import * # Library for error messages
 
-
+#Import Pages
+import LoginPage
 class App(ttk.Frame):
     def __init__(self, parent):
         ttk.Frame.__init__(self)  # initialize the superclass(frame)
@@ -10,6 +12,7 @@ class App(ttk.Frame):
         # Page list
         # ADD NEW CLASSES YOU MAKE TO LIST!  (pages will be indexed chronologically)
         self.availablePages = [
+            LoginPage.page
 
         ]
         #
@@ -30,6 +33,24 @@ class App(ttk.Frame):
             #
             # Run the create function on the desired page
             self.availablePages[number].create(self)
+
+    # Function to check if pin is correct.
+    def getPin(self):
+        self.file = open("topsecret.txt", 'r+')
+        self.mainPin = self.file.read()
+        try:
+            self.pin = self.pinEntry.get()
+            if len(self.pin) == 4:
+                if self.pin == self.mainPin:
+                    print("works")
+                else:
+                    showerror(title="Invalid Entry", message="Password is not correct.")
+                print(int(self.pin))
+            else:
+                raise Exception
+        except:
+            showerror(title="Invalid Entry", message="Please enter 4 digits.")
+
 
 
 if __name__ == "__main__":  # If this file is run directly, run the following code
