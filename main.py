@@ -57,12 +57,25 @@ class App(ttk.Frame):
                 raise Exception
         except:
             showerror(title="Invalid Entry", message="Please enter 4 digits.")
-    def SavePass(self):
+
+    # Function to save a new password.
+    def SavePassword(self):
         passwordsfile = open("PasswordsList.txt", "a")
         passwordsfile.write(
             self.passwordnameEntry.get() + ":" + self.passwordEntry.get() + "\n")  # Encrypts password to file
         passwordsfile.close()
         self.changePage(1)
+
+#   Function to display password when the name of password from the list is clicked.
+    def showsavedPassword(self, wanted):
+        pswds = open("PasswordsList.txt", "r") # Opens and reads file with all password details.
+        for line in pswds:
+            self.lineSplit = line.split(":") # Splits the name and the password with the ':'.
+            if wanted == self.lineSplit[0]: # Checks for our wanted name and its corresponding password.
+                self.thePassword = self.lineSplit[1]
+                self.theName = self.lineSplit[0]
+        pswds.close()
+        self.changePage(2) #Change page to display the password details.
 
 
 

@@ -33,7 +33,7 @@ class page:
 
         self.savePassword = ttk.Button(self,
                                        text="Save Password",
-                                       command = self.SavePass) # Uses the function made to save the password and add
+                                       command = self.SavePassword) # Uses the function made to save the password and add
                                                                 # it to the list.
         self.savePassword.grid(column=1, row=7)
 

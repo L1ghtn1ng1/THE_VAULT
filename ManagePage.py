@@ -30,7 +30,7 @@ class page():
         for element in self.pswdBtnList:
             self.details = ttk.Button(self,
                                       text=element,
-                                      command=lambda tempz=element: self.showsavedPass(tempz))
+                                      command=lambda tempz=element: self.showsavedPassword(tempz))
             self.details.grid(column=1, row=self.pswdBtnList.index(element) + 1)  # Place on grid into window.
 
         self.details = ttk.Button(self,
@@ -40,5 +40,5 @@ class page():
 
         self.goBack = ttk.Button(
             self,
-            text="Cancel", command=lambda: self.changePage(1))
+            text="Cancel", command=lambda: self.changePage(2))  # Switches to Manage Page.
         self.goBack.grid(column=1, row=999)  # Places it at the very last in the window.
