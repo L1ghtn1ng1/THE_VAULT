@@ -62,11 +62,24 @@ class App(ttk.Frame):
 
     # Function to save a new password.
     def SavePassword(self):
-        passwordsfile = open("PasswordsList.txt", "a")
-        passwordsfile.write(
-            self.passwordnameEntry.get() + ":" + self.passwordEntry.get() + "\n")  # Encrypts password to file
-        passwordsfile.close()
-        self.changePage(1)
+        try:
+            if "" == self.passwordEntry.get() or " " in self.passwordEntry.get():
+                raise ValueError("Enter a password/ no spaces allowed.")
+            with open("PasswordsList.txt", "r") as f:  # Opens file and reads it.
+                for line in f:  # Goes through each line in the file.
+
+                    if self.passwordnameEntry.get() in line:  # Finds if password is already saved in file.
+                        raise ValueError("Password already exists.")
+
+            self.encryptedPassword = self.encrypt(self.passwordEntry.get()).decode('utf-8')
+
+            passwordsfile = open("PasswordsList.txt", "a")
+            passwordsfile.write(
+                self.passwordnameEntry.get() + ":" + self.encryptedPassword + "\n")  # Encrypts password to file
+            passwordsfile.close()
+            self.changePage(1)
+        except ValueError as e:
+            showerror(title="Error", message=e.args[0])
 
 #   Function to display password when the name of password from the list is clicked.
     def showsavedPassword(self, wanted):
