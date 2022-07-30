@@ -10,6 +10,8 @@ import LoginPage
 import MenuPage
 import ManagePage
 import AddingPasswordPage
+import ConfirmPasswordSaved
+
 class App(ttk.Frame):
     def __init__(self, parent):
         ttk.Frame.__init__(self)  # initialize the superclass(frame)
@@ -20,7 +22,8 @@ class App(ttk.Frame):
             LoginPage.page,
             MenuPage.page,
             ManagePage.page,
-            AddingPasswordPage.page
+            AddingPasswordPage.page,
+            ConfirmPasswordSaved.page
 
         ]
         #
@@ -77,7 +80,7 @@ class App(ttk.Frame):
             passwordsfile.write(
                 self.passwordnameEntry.get() + ":" + self.encryptedPassword + "\n")  # Encrypts password to file
             passwordsfile.close()
-            self.changePage(1)
+            self.changePage(4)
         except ValueError as e:
             showerror(title="Error", message=e.args[0])
 
