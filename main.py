@@ -2,6 +2,8 @@
 import tkinter as tk
 from tkinter import ttk
 from tkinter.messagebox import * # Library for error messages
+from cryptography.fernet import Fernet  # Library for encryption
+import os
 
 #Import Pages
 import LoginPage
@@ -77,9 +79,42 @@ class App(ttk.Frame):
         pswds.close()
         self.changePage(2) #Change page to display the password details.
 
+    # Function to encrypt passwords saved.
+    def encrypt(self, rawPassword):
+        # Open the key file
+        self.f = Fernet(open("key.key", "rb").read())
+        # rawPassword is encoded to bytes
+        # Encrypt `rawPassword` using the key and store to `encryptedP`
+        self.encryptedP = self.f.encrypt(bytes(rawPassword, 'utf-8'))
+
+        # Return the encrypted password
+        return self.encryptedP
+
+
+#   Function to decrypt encrypted passwords.
+    def decrypt(self,encryptedPassword):
+        # Open the key file
+        self.f = Fernet(open("key.key", "rb").read())
+
+        # encryptedPassword is encoded to bytes
+        # Decrypt `encryptedPassword` using the key and store to `decryptedP`
+        self.decryptedP = self.f.decrypt(bytes(encryptedPassword, 'utf-8'))
+
+        # Decode decryptedP to normal password and then return it
+        return self.decryptedP.decode('utf-8')
 
 
 if __name__ == "__main__":  # If this file is run directly, run the following code
+
+    if not os.path.exists("./key.key"):  # Checks if key already exists
+        key = Fernet.generate_key()  # Generates key if there isn't one.
+        with open("key.key", "wb") as key_file:
+            key_file.write(key)
+        print("Key generated successfully")
+    else:
+        print("Key already exists")
+
+
     root = tk.Tk()  # Create a window
     root.title("The Vault")  # Add title
     app = App(root)  # Link the App and window we made
