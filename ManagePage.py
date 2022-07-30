@@ -27,7 +27,7 @@ class page():
 
         self.details = ttk.Button(self,
                                   text="Add Password",
-                                  command=lambda: self.changePage(1))
+                                  command=lambda: self.changePage(3))
         self.details.grid(column=1, row=6)
 
         self.goBack = ttk.Button(

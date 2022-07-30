@@ -7,6 +7,7 @@ from tkinter.messagebox import * # Library for error messages
 import LoginPage
 import MenuPage
 import ManagePage
+import AddingPasswordPage
 class App(ttk.Frame):
     def __init__(self, parent):
         ttk.Frame.__init__(self)  # initialize the superclass(frame)
@@ -16,7 +17,8 @@ class App(ttk.Frame):
         self.availablePages = [
             LoginPage.page,
             MenuPage.page,
-            ManagePage.page
+            ManagePage.page,
+            AddingPasswordPage.page
 
         ]
         #
@@ -53,6 +55,12 @@ class App(ttk.Frame):
                 raise Exception
         except:
             showerror(title="Invalid Entry", message="Please enter 4 digits.")
+    def SavePass(self):
+        passwordsfile = open("PasswordsList.txt", "a")
+        passwordsfile.write(
+            self.passwordnameEntry.get() + ":" + self.passwordEntry.get() + "\n")  # Encrypts password to file
+        passwordsfile.close()
+        self.changePage(1)
 
 
 
