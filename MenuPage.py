@@ -1,7 +1,7 @@
 from tkinter import ttk
 
 
-class page():
+class page:
     def create(self):
         # Label Menu title.
         self.Title = ttk.Label(
@@ -24,7 +24,7 @@ class page():
         # Button to switch to manage passwords page.
         self.manageLabel = ttk.Button(
             self,
-            text="Manage Passwords", command=lambda: self.changePage(0)) # Switch to manage password page.
+            text="Manage Passwords", command=lambda: self.changePage(2)) # Switch to manage password page.
         self.manageLabel.grid(column=1, row=4)  # Place on grid into window.
 
         # Button to switch to password generator.

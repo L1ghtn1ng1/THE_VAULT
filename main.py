@@ -6,6 +6,7 @@ from tkinter.messagebox import * # Library for error messages
 #Import Pages
 import LoginPage
 import MenuPage
+import ManagePage
 class App(ttk.Frame):
     def __init__(self, parent):
         ttk.Frame.__init__(self)  # initialize the superclass(frame)
@@ -14,7 +15,8 @@ class App(ttk.Frame):
         # ADD NEW CLASSES YOU MAKE TO LIST!  (pages will be indexed chronologically)
         self.availablePages = [
             LoginPage.page,
-            MenuPage.page
+            MenuPage.page,
+            ManagePage.page
 
         ]
         #
