@@ -46,9 +46,11 @@ class App(ttk.Frame):
         self.mainPin = self.file.read()
         try:
             self.pin = self.pinEntry.get()
-            if len(self.pin) == 4:
+            if ' ' in self.pin:
+                showerror(title ="Invalid Entry", message="Re-enter 4 digit pin without spaces.")
+            elif len(self.pin) == 4:
                 if self.pin == self.mainPin:
-                    self.changePage(1)
+                    self.changePage(1) # Change pages if pin is correct.
                 else:
                     showerror(title="Invalid Entry", message="Password is not correct.")
             else:
