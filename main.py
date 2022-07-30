@@ -5,6 +5,7 @@ from tkinter.messagebox import * # Library for error messages
 
 #Import Pages
 import LoginPage
+import MenuPage
 class App(ttk.Frame):
     def __init__(self, parent):
         ttk.Frame.__init__(self)  # initialize the superclass(frame)
@@ -12,7 +13,8 @@ class App(ttk.Frame):
         # Page list
         # ADD NEW CLASSES YOU MAKE TO LIST!  (pages will be indexed chronologically)
         self.availablePages = [
-            LoginPage.page
+            LoginPage.page,
+            MenuPage.page
 
         ]
         #
@@ -42,10 +44,9 @@ class App(ttk.Frame):
             self.pin = self.pinEntry.get()
             if len(self.pin) == 4:
                 if self.pin == self.mainPin:
-                    print("works")
+                    self.changePage(1)
                 else:
                     showerror(title="Invalid Entry", message="Password is not correct.")
-                print(int(self.pin))
             else:
                 raise Exception
         except:
