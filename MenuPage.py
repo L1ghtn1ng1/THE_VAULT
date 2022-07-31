@@ -30,7 +30,7 @@ class page:
         # Button to switch to password generator.
         self.passGenerator = ttk.Button(
             self,
-            text="Password Generator", command=lambda: self.changePage(0))  # Switch to the password generator page.
+            text="Password Generator", command=lambda: self.changePage(5))  # Switch to the password generator page.
         self.passGenerator.grid(column=1, row=5)  # Place on grid into window.
 
         # Button to switch pages.

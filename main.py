@@ -11,6 +11,8 @@ import MenuPage
 import ManagePage
 import AddingPasswordPage
 import ConfirmPasswordSaved
+import PasswordGeneratorPage
+import DisplayGeneratedPassword
 
 class App(ttk.Frame):
     def __init__(self, parent):
@@ -23,7 +25,9 @@ class App(ttk.Frame):
             MenuPage.page,
             ManagePage.page,
             AddingPasswordPage.page,
-            ConfirmPasswordSaved.page
+            ConfirmPasswordSaved.page,
+            PasswordGeneratorPage.page,
+            DisplayGeneratedPassword.page
 
         ]
         #
