@@ -96,7 +96,7 @@ class App(ttk.Frame):
         for line in pswds:
             self.lineSplit = line.split(":") # Splits the name and the password with the ':'.
             if wanted == self.lineSplit[0]: # Checks for our wanted name and its corresponding password.
-                self.thePassword = self.lineSplit[1]
+                self.thePassword = self.decrypt(self.lineSplit[1])
                 self.theName = self.lineSplit[0]
         pswds.close()
         self.changePage(7) #Change page to display the password details.
