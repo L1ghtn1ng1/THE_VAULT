@@ -14,7 +14,7 @@ class page:  # Home page class
         self.mainTitle.grid(column=1, row=1)  # Places on the grid and into the window.
 
         self.entryKey = ttk.Label(
-            self, text="Enter your 4 digit key!",
+            self, text="Enter your 4 digit pin!",
             font=("Video Cond", 20))
         self.entryKey.grid(column=1, row=2)  # Places on the grid and into the window.
 

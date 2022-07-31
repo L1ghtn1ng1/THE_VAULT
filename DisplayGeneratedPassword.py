@@ -29,13 +29,13 @@ class page():
         self.Title.grid(column = 1, row = 1) # Place on grid into window.
 
         self.generatedPass = ttk.Label(self,
-                                       text = self.final_str,
+                                       text = self.final_str, # Label to display the password.
                                        font=("Video Cond", 25))
         self.generatedPass.grid(column = 1, row = 2)
 
         self.copyButton = ttk.Button(self,
                                      text = "Copy Password",
-                                     command = lambda : clipboard.copy(self.final_str))
+                                     command = lambda : clipboard.copy(self.final_str)) # Allow user to copy password.
         self.copyButton.grid(column=1, row = 3)
 
 

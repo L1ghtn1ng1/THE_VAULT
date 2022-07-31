@@ -13,6 +13,7 @@ import AddingPasswordPage
 import ConfirmPasswordSaved
 import PasswordGeneratorPage
 import DisplayGeneratedPassword
+import ShowSavedPassword
 
 class App(ttk.Frame):
     def __init__(self, parent):
@@ -27,7 +28,8 @@ class App(ttk.Frame):
             AddingPasswordPage.page,
             ConfirmPasswordSaved.page,
             PasswordGeneratorPage.page,
-            DisplayGeneratedPassword.page
+            DisplayGeneratedPassword.page,
+            ShowSavedPassword.page
 
         ]
         #
@@ -97,7 +99,7 @@ class App(ttk.Frame):
                 self.thePassword = self.lineSplit[1]
                 self.theName = self.lineSplit[0]
         pswds.close()
-        self.changePage(2) #Change page to display the password details.
+        self.changePage(7) #Change page to display the password details.
 
     # Function to encrypt passwords saved.
     def encrypt(self, rawPassword):
