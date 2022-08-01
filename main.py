@@ -49,7 +49,7 @@ class App(ttk.Frame):
             #
             #
             # Run the create function on the desired page
-            self.availablePages[number].create(self)
+        self.availablePages[number].create(self)
 
     # Function to check if pin is correct.
     def getPin(self):
@@ -135,6 +135,33 @@ if __name__ == "__main__":  # If this file is run directly, run the following co
         print("Key generated successfully")
     else:
         print("Key already exists")
+
+        # This loop checks if the app is being run for the first time and allows the user to set up a pin, else it keeps
+        # as normal.
+    breakOut = 0  # initalise variable for while loop.
+    while breakOut == 0:
+        if (not os.path.exists("topsecret.txt")):
+            newPin = input("New Pin ")
+            # Makes sure the pin that is being set meets the requirements.
+            if len(newPin) == 4 and newPin.isdigit():
+                confirmPin = input("Confirm Pin ")
+                if (confirmPin == newPin):
+                    file = open("topsecret.txt", 'a')
+                    file.write(newPin)
+                    file.close()
+                    filething = open("PasswordsList.txt", "w")
+                    filething.close()
+                    print("Done")
+                    breakOut = 1
+                else:
+                    print("Pin does not match, please try again.")
+            # Makes sure there is no spaces between the numbers and makes sure the user enters numbers.
+            elif " " in newPin:
+                print("Please re-enter your pin without spaces!")
+            else:
+                print("Please enter 4 digits")
+        else:
+            breakOut = 1  # Stops the while loop from running.
 
 
     root = tk.Tk()  # Create a window

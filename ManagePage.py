@@ -40,5 +40,5 @@ class page():
 
         self.goBack = ttk.Button(
             self,
-            text="Cancel", command=lambda: self.changePage(2))  # Switches to Manage Page.
+            text="Cancel", command=lambda: self.changePage(1))  # Switches to Manage Page.
         self.goBack.grid(column=1, row=999)  # Places it at the very last in the window.
