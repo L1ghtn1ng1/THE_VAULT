@@ -33,6 +33,12 @@ class page:
             text="Password Generator", command=lambda: self.changePage(5))  # Switch to the password generator page.
         self.passGenerator.grid(column=1, row=5)  # Place on grid into window.
 
+        #Button to switch themes.
+        self.theme = ttk.Button(self,
+                                text="Switch to light/dark mode.",
+                                command=lambda: self.svtk.toggle_theme())
+        self.theme.grid(column=1, row=6)
+
         # Button to switch pages.
         self.logoff = ttk.Button(
             self,

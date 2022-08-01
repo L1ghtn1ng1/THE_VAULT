@@ -4,6 +4,7 @@ from tkinter import ttk
 from tkinter.messagebox import * # Library for error messages
 from cryptography.fernet import Fernet  # Library for encryption
 import os
+import sv_ttk
 
 #Import Pages
 import LoginPage
@@ -17,6 +18,8 @@ import ShowSavedPassword
 
 class App(ttk.Frame):
     def __init__(self, parent):
+        self.svtk = sv_ttk  # Making theme a class variable.
+        sv_ttk.use_dark_theme()  # Default theme.
         ttk.Frame.__init__(self)  # initialize the superclass(frame)
 
         # Page list
