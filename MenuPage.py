@@ -52,4 +52,4 @@ class page:
             self,
             text="Log Out",
             command=lambda: self.changePage(0))
-        self.logoff.grid(column=1, row=6)  # Place on grid into window.
+        self.logoff.grid(column=1, row=7)  # Place on grid into window.

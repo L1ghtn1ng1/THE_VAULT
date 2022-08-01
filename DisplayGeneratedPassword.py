@@ -35,7 +35,7 @@ class page():
         self.generatedPass = ttk.Label(self,
                                        # Label to display the password.
                                        text=self.final_str,
-                                       font=("Video Cond", 25))
+                                       font=("Arial", 25))
         self.generatedPass.grid(column=1, row=2)
 
         self.copyButton = ttk.Button(
