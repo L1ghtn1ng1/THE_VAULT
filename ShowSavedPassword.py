@@ -26,7 +26,12 @@ class page():
                                      command=lambda: clipboard.copy(self.thePassword))
         self.copyButton.grid(column=1, row=4)
 
+        self.deleteButton = ttk.Button(self,
+                                       text = "Delete",
+                                       command=lambda tempx = self.theName :self.deletePassword(tempx))
+        self.deleteButton.grid(column = 1, row= 5)
+
         self.goBack = ttk.Button(
             self,
             text="Return", command=lambda: self.changePage(2)) # Switches to manage passwords page.
-        self.goBack.grid(column=1, row=5)
+        self.goBack.grid(column=1, row=6)

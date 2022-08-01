@@ -74,6 +74,8 @@ class App(ttk.Frame):
         try:
             if "" == self.passwordEntry.get() or " " in self.passwordEntry.get():
                 raise ValueError("Enter a password/ no spaces allowed.")
+            elif len(self.passwordEntry.get()) > 25:
+                raise ValueError("Maximum character limit is 25!")
             with open("PasswordsList.txt", "r") as f:  # Opens file and reads it.
                 for line in f:  # Goes through each line in the file.
 
@@ -124,6 +126,22 @@ class App(ttk.Frame):
 
         # Decode decryptedP to normal password and then return it
         return self.decryptedP.decode('utf-8')
+
+    #Function to delete passwords
+    def deletePassword(self, temp):
+        with open("PasswordsList.txt", 'r') as file:
+            self.lines = file.readlines()
+
+        with open("PasswordsList.txt", 'w') as file:
+            for line in self.lines:
+                # find() returns -1 if no match is found
+                if line.find(temp) != -1:
+                    pass
+                else:
+                    file.write(line)
+        self.changePage(2)
+
+
 
 
 if __name__ == "__main__":  # If this file is run directly, run the following code
