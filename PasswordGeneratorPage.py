@@ -10,9 +10,11 @@ class page():
         self.Title.grid(column=1, row=1)  # Place on grid into window.
 
         # Button to generate password.
-        self.details = ttk.Button(self,
-                                  text="Generate Password!",
-                                  command=lambda: self.changePage(6))  # Generates a random password and switches pages
+        self.details = ttk.Button(
+            self,
+            text="Generate Password!",
+            command=lambda: self.changePage(6))  # Generates a random password
+    # and switches pages
         # to display it.
         self.details.grid(column=1, row=2)  # Place on grid into window.
 

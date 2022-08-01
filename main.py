@@ -1,12 +1,12 @@
 # Base libraries
 import tkinter as tk
 from tkinter import ttk
-from tkinter.messagebox import * # Library for error messages
+from tkinter.messagebox import *  # Library for error messages
 from cryptography.fernet import Fernet  # Library for encryption
 import os
 import sv_ttk
 
-#Import Pages
+# Import Pages
 import LoginPage
 import MenuPage
 import ManagePage
@@ -16,6 +16,7 @@ import PasswordGeneratorPage
 import DisplayGeneratedPassword
 import ShowSavedPassword
 
+
 class App(ttk.Frame):
     def __init__(self, parent):
         self.svtk = sv_ttk  # Making theme a class variable.
@@ -23,7 +24,8 @@ class App(ttk.Frame):
         ttk.Frame.__init__(self)  # initialize the superclass(frame)
 
         # Page list
-        # ADD NEW CLASSES YOU MAKE TO LIST!  (pages will be indexed chronologically)
+        # ADD NEW CLASSES YOU MAKE TO LIST!  (pages will be indexed
+        # chronologically)
         self.availablePages = [
             LoginPage.page,
             MenuPage.page,
@@ -61,50 +63,64 @@ class App(ttk.Frame):
         try:
             self.pin = self.pinEntry.get()
             if ' ' in self.pin:
-                showerror(title ="Invalid Entry", message="Re-enter 4 digit pin without spaces.")
+                showerror(title="Invalid Entry",
+                          message="Re-enter 4 digit pin without spaces.")
             elif len(self.pin) == 4:
                 if self.pin == self.mainPin:
-                    self.changePage(1) # Change pages if pin is correct.
+                    self.changePage(1)  # Change pages if pin is correct.
                 else:
-                    showerror(title="Invalid Entry", message="Password is not correct.")
+                    showerror(
+                        title="Invalid Entry",
+                        message="Password is not correct.")
             else:
                 raise Exception
-        except:
+        except BaseException:
             showerror(title="Invalid Entry", message="Please enter 4 digits.")
 
     # Function to save a new password.
     def SavePassword(self):
         try:
-            if "" == self.passwordEntry.get() or " " in self.passwordEntry.get():
+            self.pswdEntrytxt = self.passwordEntry.get()
+            if "" == self.pswdEntrytxt or " " in self.pswdEntrytxt:
                 raise ValueError("Enter a password/ no spaces allowed.")
             elif len(self.passwordEntry.get()) > 25:
                 raise ValueError("Maximum character limit is 25!")
-            with open("PasswordsList.txt", "r") as f:  # Opens file and reads it.
+            # Opens file and reads it.
+            with open("PasswordsList.txt", "r") as f:
                 for line in f:  # Goes through each line in the file.
 
-                    if self.passwordnameEntry.get() in line:  # Finds if password is already saved in file.
+                    # Finds if password is already saved in file.
+                    if self.passwordnameEntry.get() in line:
                         raise ValueError("Password already exists.")
 
-            self.encryptedPassword = self.encrypt(self.passwordEntry.get()).decode('utf-8')
+            self.encryptedPassword = self.encrypt(
+                self.passwordEntry.get()).decode('utf-8')
 
             passwordsfile = open("PasswordsList.txt", "a")
             passwordsfile.write(
-                self.passwordnameEntry.get() + ":" + self.encryptedPassword + "\n")  # Encrypts password to file
+                self.passwordnameEntry.get() +
+                ":" +
+                self.encryptedPassword +
+                "\n")  # Encrypts password to file
             passwordsfile.close()
             self.changePage(4)
         except ValueError as e:
             showerror(title="Error", message=e.args[0])
 
-#   Function to display password when the name of password from the list is clicked.
+    # Function to display password when the name of password from the list is
+    # clicked.
     def showsavedPassword(self, wanted):
-        pswds = open("PasswordsList.txt", "r") # Opens and reads file with all password details.
+        # Opens and reads file with all password details.
+        pswds = open("PasswordsList.txt", "r")
         for line in pswds:
-            self.lineSplit = line.split(":") # Splits the name and the password with the ':'.
-            if wanted == self.lineSplit[0]: # Checks for our wanted name and its corresponding password.
+            # Splits the name and the password with the ':'.
+            self.lineSplit = line.split(":")
+            # Checks for our wanted name and its corresponding password.
+            if wanted == self.lineSplit[0]:
                 self.thePassword = self.decrypt(self.lineSplit[1])
                 self.theName = self.lineSplit[0]
         pswds.close()
-        self.changePage(7) #Change page to display the password details.
+        self.changePage(7)  # Change page to display the password details.
 
     # Function to encrypt passwords saved.
     def encrypt(self, rawPassword):
@@ -117,9 +133,8 @@ class App(ttk.Frame):
         # Return the encrypted password
         return self.encryptedP
 
-
-#   Function to decrypt encrypted passwords.
-    def decrypt(self,encryptedPassword):
+    #   Function to decrypt encrypted passwords.
+    def decrypt(self, encryptedPassword):
         # Open the key file
         self.f = Fernet(open("key.key", "rb").read())
 
@@ -130,7 +145,7 @@ class App(ttk.Frame):
         # Decode decryptedP to normal password and then return it
         return self.decryptedP.decode('utf-8')
 
-    #Function to delete passwords
+    # Function to delete passwords
     def deletePassword(self, temp):
         with open("PasswordsList.txt", 'r') as file:
             self.lines = file.readlines()
@@ -145,9 +160,8 @@ class App(ttk.Frame):
         self.changePage(2)
 
 
-
-
-if __name__ == "__main__":  # If this file is run directly, run the following code
+# If this file is run directly, run the following code
+if __name__ == "__main__":
 
     if not os.path.exists("./key.key"):  # Checks if key already exists
         key = Fernet.generate_key()  # Generates key if there isn't one.
@@ -157,8 +171,9 @@ if __name__ == "__main__":  # If this file is run directly, run the following co
     else:
         print("Key already exists")
 
-        # This loop checks if the app is being run for the first time and allows the user to set up a pin, else it keeps
-        # as normal.
+# This loop checks if the app is being run for the first time and allows
+# the user to set up a pin, else it keeps
+# as normal.
     breakOut = 0  # initalise variable for while loop.
     while breakOut == 0:
         if (not os.path.exists("topsecret.txt")):
@@ -176,14 +191,14 @@ if __name__ == "__main__":  # If this file is run directly, run the following co
                     breakOut = 1
                 else:
                     print("Pin does not match, please try again.")
-            # Makes sure there is no spaces between the numbers and makes sure the user enters numbers.
+            # Makes sure there is no spaces between the numbers and makes sure
+            # the user enters numbers.
             elif " " in newPin:
                 print("Please re-enter your pin without spaces!")
             else:
                 print("Please enter 4 digits")
         else:
             breakOut = 1  # Stops the while loop from running.
-
 
     root = tk.Tk()  # Create a window
     root.title("The Vault")  # Add title
