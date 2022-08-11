@@ -83,8 +83,12 @@ class App(ttk.Frame):
             self.pswdEntrytxt = self.passwordEntry.get()
             if "" == self.pswdEntrytxt or " " in self.pswdEntrytxt:
                 raise ValueError("Enter a password/ no spaces allowed.")
-            elif len(self.passwordEntry.get()) > 25:
-                raise ValueError("Maximum character limit is 25!")
+            elif len(self.passwordEntry.get()) > 25 or len(self.passwordEntry.get()) < 8:
+                raise ValueError("Password must be between 8-25 characters!")
+            elif len(self.passwordnameEntry.get()) > 15:
+                raise ValueError("Maximum character limit is 15 for name!")
+            elif len(self.pswdBtnList) == 15:
+                raise ValueError("Maximum passwords to save is 15, please delete a password!")
             # Opens file and reads it.
             with open("PasswordsList.txt", "r") as f:
                 for line in f:  # Goes through each line in the file.
@@ -93,7 +97,7 @@ class App(ttk.Frame):
                     if self.passwordnameEntry.get() in line:
                         raise ValueError("Password already exists.")
 
-            self.encryptedPassword = self.encrypt(
+            self.encryptedPassword = self.encryptPassword(
                 self.passwordEntry.get()).decode('utf-8')
 
             passwordsfile = open("PasswordsList.txt", "a")
@@ -117,13 +121,13 @@ class App(ttk.Frame):
             self.lineSplit = line.split(":")
             # Checks for our wanted name and its corresponding password.
             if wanted == self.lineSplit[0]:
-                self.thePassword = self.decrypt(self.lineSplit[1])
+                self.thePassword = self.decryptPassword(self.lineSplit[1])
                 self.theName = self.lineSplit[0]
         pswds.close()
         self.changePage(7)  # Change page to display the password details.
 
     # Function to encrypt passwords saved.
-    def encrypt(self, rawPassword):
+    def encryptPassword(self, rawPassword):
         # Open the key file
         self.f = Fernet(open("key.key", "rb").read())
         # rawPassword is encoded to bytes
@@ -134,7 +138,7 @@ class App(ttk.Frame):
         return self.encryptedP
 
     #   Function to decrypt encrypted passwords.
-    def decrypt(self, encryptedPassword):
+    def decryptPassword(self, encryptedPassword):
         # Open the key file
         self.f = Fernet(open("key.key", "rb").read())
 
@@ -177,7 +181,7 @@ if __name__ == "__main__":
     breakOut = 0  # initalise variable for while loop.
     while breakOut == 0:
         if (not os.path.exists("topsecret.txt")):
-            newPin = input("New Pin ")
+            newPin = input("Enter a 4 digit pin! ")
             # Makes sure the pin that is being set meets the requirements.
             if len(newPin) == 4 and newPin.isdigit():
                 confirmPin = input("Confirm Pin ")
@@ -185,8 +189,8 @@ if __name__ == "__main__":
                     file = open("topsecret.txt", 'a')
                     file.write(newPin)
                     file.close()
-                    filething = open("PasswordsList.txt", "w")
-                    filething.close()
+                    pswdFile = open("PasswordsList.txt", "w")
+                    pswdFile.close()
                     print("Done")
                     breakOut = 1
                 else:
@@ -194,9 +198,9 @@ if __name__ == "__main__":
             # Makes sure there is no spaces between the numbers and makes sure
             # the user enters numbers.
             elif " " in newPin:
-                print("Please re-enter your pin without spaces!")
+                print("Error: Please re-enter your pin without spaces!")
             else:
-                print("Please enter 4 digits")
+                print("Error: Please enter 4 digits.")
         else:
             breakOut = 1  # Stops the while loop from running.
 

@@ -1,4 +1,4 @@
-import tkinter as tk
+from tkinter import *
 from tkinter import ttk
 
 
@@ -27,7 +27,7 @@ class page():
         self.Title = ttk.Label(self,
                                text="Manage Passwords",
                                font=("Video Cond", 25))
-        self.Title.grid(column=1, row=0)  # Place on grid into window.
+        self.Title.grid(column=1, row=0, padx = 5)  # Place on grid into window.
 
         # The for loop makes as many buttons as there are passwords.
         # All have the same command, to display the
@@ -38,10 +38,12 @@ class page():
             self.details = ttk.Button(
                 self,
                 text=element,
-                command=lambda tempz=element: self.showsavedPassword(tempz))
+                width = 15,
+                command=lambda tempz = element: self.showsavedPassword(tempz))
             # Place on grid into window.
             self.details.grid(
-                column=1, row=self.pswdBtnList.index(element) + 1)
+                column=1, row=self.pswdBtnList.index(element) + 1,
+            pady = 5)
 
         # Switches to add password page.
         self.details = ttk.Button(
@@ -49,7 +51,7 @@ class page():
             text="Add Password",
             command=lambda: self.changePage(3))
         # Places it at second to last in the window.
-        self.details.grid(column=1, row=998)
+        self.details.grid(column=1, row=998, pady = (20,0))
 
         # Switches to Manage Page.
         self.goBack = ttk.Button(
@@ -57,4 +59,4 @@ class page():
             text="Cancel",
             command=lambda: self.changePage(1))
         # Places it at the very last in the window.
-        self.goBack.grid(column=1, row=999)
+        self.goBack.grid(column=1, row=999, pady = (3,0))

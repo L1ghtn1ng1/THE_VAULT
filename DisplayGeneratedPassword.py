@@ -30,22 +30,22 @@ class page():
         self.Title = ttk.Label(self,
                                text="Here is your password!",
                                font=("Video Cond", 25))
-        self.Title.grid(column=1, row=1)  # Place on grid into window.
+        self.Title.grid(column=1, row=1, padx = 5)  # Place on grid into window.
 
         self.generatedPass = ttk.Label(self,
                                        # Label to display the password.
                                        text=self.final_str,
                                        font=("Arial", 25))
-        self.generatedPass.grid(column=1, row=2)
+        self.generatedPass.grid(column=1, row=2, pady = (10,6))
 
         self.copyButton = ttk.Button(
             self, text="Copy Password", command=lambda: clipboard.copy(
                 self.final_str))  # Allow user to copy password.
-        self.copyButton.grid(column=1, row=3)
+        self.copyButton.grid(column=1, row=3, pady = (5,0))
 
         # Button purpose to go back to Menu page.
         self.goBack = ttk.Button(
             self,
             text="Return",
             command=lambda: self.changePage(1))
-        self.goBack.grid(column=1, row=4)
+        self.goBack.grid(column=1, row=4, pady = (5,0))
