@@ -12,12 +12,12 @@ class page:
         self.Title = ttk.Label(self,
                                text="Adding Password",
                                font=("Video Cond", 25))
-        self.Title.grid(column=1, row=1, padx = 5)
+        self.Title.grid(column=1, row=1, padx=5)
 
         self.details = ttk.Label(self,
                                  text="Details",
                                  font=("Video Cond", 23))
-        self.details.grid(column=1, row=2, pady = (5,0))
+        self.details.grid(column=1, row=2, pady=(5, 0))
 
         self.passwordName = ttk.Label(self,
                                       text="Password Name:",
@@ -39,7 +39,7 @@ class page:
         self.savePassword = ttk.Button(
             self, text="Save Password", command=self.SavePassword)
         # it to the list.
-        self.savePassword.grid(column=1, row=7, pady = (10,0))
+        self.savePassword.grid(column=1, row=7, pady=(10, 0))
 
         # Button's purpose is to switch to manage passwords page.
         self.goBack = ttk.Button(

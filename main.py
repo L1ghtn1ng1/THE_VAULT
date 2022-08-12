@@ -79,16 +79,17 @@ class App(ttk.Frame):
 
     # Function to save a new password.
     def SavePassword(self):
+        self.pswd_len = len(self.passwordEntry.get())
         try:
             self.pswdEntrytxt = self.passwordEntry.get()
             if "" == self.pswdEntrytxt or " " in self.pswdEntrytxt:
                 raise ValueError("Enter a password/ no spaces allowed.")
-            elif len(self.passwordEntry.get()) > 25 or len(self.passwordEntry.get()) < 8:
+            elif (self.pswd_len > 25 or self.pswd_len < 8):
                 raise ValueError("Password must be between 8-25 characters!")
             elif len(self.passwordnameEntry.get()) > 15:
                 raise ValueError("Maximum character limit is 15 for name!")
             elif len(self.pswdBtnList) == 15:
-                raise ValueError("Maximum passwords to save is 15, please delete a password!")
+                raise ValueError("Limit reached, please delete a password!")
             # Opens file and reads it.
             with open("PasswordsList.txt", "r") as f:
                 for line in f:  # Goes through each line in the file.

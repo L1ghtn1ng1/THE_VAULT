@@ -13,13 +13,13 @@ class page:  # Home page class
             text="Password Manager",
             font=("Video Cond", 25))
         # Places on the grid and into the window.
-        self.mainTitle.grid(column=1, row=1, pady = (0,5))
+        self.mainTitle.grid(column=1, row=1, pady=(0, 5))
 
         self.entryKey = ttk.Label(
             self, text="Enter your 4 digit pin!",
             font=("Video Cond", 20))
         # Places on the grid and into the window.
-        self.entryKey.grid(column=1, row=2, pady = (0,3), padx = 3)
+        self.entryKey.grid(column=1, row=2, pady=(0, 3), padx=3)
 
         self.pinEntry = ttk.Entry(self)
         # Places on the grid and into the window.
@@ -30,4 +30,4 @@ class page:  # Home page class
             text="LOGIN",
             command=self.getPin)
         # Places on the grid and into the window.
-        self.loginButton.grid(column=1, row=4, pady = 10)
+        self.loginButton.grid(column=1, row=4, pady=10)

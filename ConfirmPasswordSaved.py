@@ -10,7 +10,7 @@ class page():
         self.Title = ttk.Label(self,
                                text="Password Saved!",
                                font=("Video Cond", 25))
-        self.Title.grid(column=1, row=1, padx = 5, pady = (0,10))
+        self.Title.grid(column=1, row=1, padx=5, pady=(0, 10))
 
         # Button purpose is to go to menu page.
         self.goBack = ttk.Button(

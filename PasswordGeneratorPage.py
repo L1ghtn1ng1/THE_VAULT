@@ -7,7 +7,8 @@ class page():
         self.Title = ttk.Label(self,
                                text="Password Generator",
                                font=("Video Cond", 25))
-        self.Title.grid(column=1, row=1, pady = (0,10), padx = 5)  # Place on grid into window.
+        self.Title.grid(column=1, row=1, pady=(0, 10), padx=5)
+        # Place on grid into window.
 
         # Button to generate password.
         self.details = ttk.Button(
